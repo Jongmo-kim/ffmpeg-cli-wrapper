@@ -8,6 +8,7 @@ import net.bramp.ffmpeg.progress.ProgressListener;
 import net.bramp.ffmpeg.progress.ProgressParser;
 import net.bramp.ffmpeg.progress.TcpProgressParser;
 import org.apache.commons.lang3.math.Fraction;
+import org.slf4j.Logger;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -85,8 +86,18 @@ public class FFmpeg extends FFcommon {
     this(path, new RunProcessFunction());
   }
 
+  public FFmpeg(@Nonnull String path, @Nonnull Logger logger) throws IOException {
+    this(path, new RunProcessFunction(), logger);
+  }
+
   public FFmpeg(@Nonnull String path, @Nonnull ProcessFunction runFunction) throws IOException {
     super(path, runFunction);
+    version();
+  }
+
+  public FFmpeg(@Nonnull String path, @Nonnull ProcessFunction runFunction, @Nonnull Logger logger)
+      throws IOException {
+    super(path, runFunction, logger);
     version();
   }
 
